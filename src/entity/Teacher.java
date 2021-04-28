@@ -11,7 +11,6 @@ public class Teacher extends Person {
     private static final String LECTURER = "Giảng viên chính";
     private static final String MASTER = "Thạc sĩ";
 
-
     private String level;
 
     public Teacher() {
@@ -21,8 +20,8 @@ public class Teacher extends Person {
         this.level = level;
     }
 
-    public Teacher(String name, String address, String phoneNumber, String level) {
-        super(name, address, phoneNumber);
+    public Teacher(int id, String name, String address, String phoneNumber, String level) {
+        super(id, name, address, phoneNumber);
         this.level = level;
     }
 

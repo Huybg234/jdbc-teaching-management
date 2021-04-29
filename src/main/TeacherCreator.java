@@ -1,6 +1,5 @@
 package main;
 
-import entity.Subject;
 import entity.Teacher;
 
 import java.util.ArrayList;

@@ -4,6 +4,7 @@ import entity.Subject;
 import entity.Teacher;
 import repository.SubjectDao;
 import repository.TeacherDao;
+import repository.TeachingDao;
 import teachingtimesheet.Teaching;
 import util.CollectionUtil;
 
@@ -18,6 +19,7 @@ public class MainRun {
 
     public static final TeacherDao teacherDao = new TeacherDao();
     public static final SubjectDao subjectDao = new SubjectDao();
+    public static final TeachingDao teachingDao = new TeachingDao();
 
     private static final SubjectCreator subjectCreator = new SubjectCreator();
     private static final TeacherCreator teacherCreator = new TeacherCreator();
@@ -34,6 +36,7 @@ public class MainRun {
     private static void init() {
         teachers = !CollectionUtil.isEmpty(teacherDao.getTeachers()) ? teacherDao.getTeachers() : new ArrayList<>();
         subjects = !CollectionUtil.isEmpty(subjectDao.getSubjects()) ? subjectDao.getSubjects() : new ArrayList<>();
+        teachings = !CollectionUtil.isEmpty(teachingDao.getTeachingTimeSheet()) ? teachingDao.getTeachingTimeSheet() : new ArrayList<>();
     }
 
     public static void menu() {

@@ -86,5 +86,4 @@ public class TeachingTimeSheetSorterAndCalculator {
             System.out.println("Lương của giảng viên " + teaching.getTeacher().getName() + " là: " + salary);
         });
     }
-
 }

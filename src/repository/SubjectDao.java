@@ -15,13 +15,13 @@ import java.util.List;
 
 public class SubjectDao {
 
-    private static final String SUBJECT_TABLE_NAME = "subject";
+    public static final String SUBJECT_TABLE_NAME = "subject";
 
-    private static final String ID = "id";
-    private static final String NAME = "name";
-    private static final String TOTAL_LESSON = "total_lesson";
-    private static final String THEORY_LESSON = "theory_lesson";
-    private static final String THEORY_EXPENSE = "theory_expense";
+    public static final String ID = "id";
+    public static final String NAME = "name";
+    public static final String TOTAL_LESSON = "total_lesson";
+    public static final String THEORY_LESSON = "theory_lesson";
+    public static final String THEORY_EXPENSE = "theory_expense";
 
     private static final Connection connection;
 

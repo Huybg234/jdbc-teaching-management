@@ -1,6 +1,7 @@
 package main;
 
 import entity.Subject;
+import entity.Teacher;
 import teachingtimesheet.Teaching;
 import teachingtimesheet.TeachingTimeSheet;
 import util.CollectionUtil;
@@ -10,8 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class TeachingTimeSheetCreator {
+    private int teachingSubjectNumber;
 
     public boolean isValidSubjectAndTeacher() {
         return !CollectionUtil.isEmpty(MainRun.subjects) && !CollectionUtil.isEmpty(MainRun.teachers);
@@ -28,7 +31,9 @@ public class TeachingTimeSheetCreator {
             System.out.println("------Kê khai cho giảng viên " + teacherName + "----------");
             System.out.print("Nhập số môn học mà giảng viên " + teacherName + " dạy :");
             int teachingSubjectNumber = inputTeachingSubjectNumber();
-
+            if (teachingSubjectNumber == 0){
+                continue;
+            }
             List<TeachingTimeSheet> teachingTimeSheets = new ArrayList<>();
             for (int j = 0; j < teachingSubjectNumber; j++) {
                 System.out.print("Nhập id môn thứ " + (j + 1) + " mà giảng viên " + teacherName + " dạy: ");
@@ -48,7 +53,6 @@ public class TeachingTimeSheetCreator {
 
 
     private int inputTeachingSubjectNumber() {
-        int teachingSubjectNumber = 0;
         boolean isValidSubjectNumber = true;
         do {
             try {
@@ -59,15 +63,16 @@ public class TeachingTimeSheetCreator {
                 isValidSubjectNumber = false;
                 continue;
             }
-            if (teachingSubjectNumber <= 0 || teachingSubjectNumber > MainRun.subjects.size()) {
+            if (teachingSubjectNumber < 0 || teachingSubjectNumber > MainRun.subjects.size()) {
                 System.out.print("Số môn giảng viên dạy phải lớn hơn 0 và nhỏ hơn tổng số môn! Nhập lại: ");
                 isValidSubjectNumber = false;
             }
+
         } while (!isValidSubjectNumber);
         return teachingSubjectNumber;
     }
 
-    private Subject inputSubjectId() {
+    public Subject inputSubjectId() {
         int subjectId = 0;
         boolean isValidSubjectId = true;
         do {
@@ -77,14 +82,15 @@ public class TeachingTimeSheetCreator {
             } catch (Exception e) {
                 System.out.println("không được có ký tự khác ngoài số! Nhập lại: ");
                 isValidSubjectId = false;
+                continue;
+            }
+            Subject subject = searchSubjectId(subjectId);
+            if (ObjectUtil.isEmpty(subject)) {
+                System.out.print("Không có id môn học vừa nhập! Nhập lại: ");
+                isValidSubjectId = false;
             }
         } while (!isValidSubjectId);
-
-        Subject subject = searchSubjectId(subjectId);
-        if (ObjectUtil.isEmpty(subject)) {
-            System.out.print("Không có id môn học vừa nhập! Nhập lại: ");
-        }
-        return subject;
+        return null;
     }
 
     private int inputTeachingClass(List<TeachingTimeSheet> teachingTimeSheets, Subject subject) {
@@ -118,8 +124,15 @@ public class TeachingTimeSheetCreator {
         return subjectOptional.orElse(null);
     }
 
+    private Teacher searchTeacherId(int id) {
+        List<Teacher> collect = MainRun.teachers.stream().filter(teacher -> teacher.getId() == id).collect(Collectors.toList());
+        if (!CollectionUtil.isEmpty(collect)) {
+            collect.get(0);
+        }
+        return null;
+    }
+
     private int calculateTotalLesson(List<TeachingTimeSheet> teachingTimeSheets) {
         return CollectionUtil.isEmpty(teachingTimeSheets) ? 0 : teachingTimeSheets.stream().mapToInt(timeSheet -> timeSheet.getSubject().getTotalLesson() * timeSheet.getTotalClass()).sum();
     }
-
 }

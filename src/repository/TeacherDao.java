@@ -15,13 +15,13 @@ import java.util.List;
 
 public class TeacherDao {
 
-    private static final String TEACHER_TABLE_NAME = "teacher";
+    public static final String TEACHER_TABLE_NAME = "teacher";
 
-    private static final String ID = "id";
-    private static final String NAME = "name";
-    private static final String ADDRESS = "address";
-    private static final String PHONE_NUMBER = "phone_number";
-    private static final String TEACHER_LEVEL = "teacher_level";
+    public static final String ID = "id";
+    public static final String NAME = "name";
+    public static final String ADDRESS = "address";
+    public static final String PHONE_NUMBER = "phone_number";
+    public static final String TEACHER_LEVEL = "teacher_level";
 
     private static final Connection connection;
 
@@ -42,9 +42,9 @@ public class TeacherDao {
                 int id = resultSet.getInt(ID);
                 String name = resultSet.getString(NAME);
                 String address = resultSet.getString(ADDRESS);
-                String phone = resultSet.getString(PHONE_NUMBER);
-                String teacherLevel = resultSet.getString(TEACHER_LEVEL);
-                Teacher teacher = new Teacher(id, name, address, phone, teacherLevel);
+                String phone_number = resultSet.getString(PHONE_NUMBER);
+                String teacher_level = resultSet.getString(TEACHER_LEVEL);
+                Teacher teacher = new Teacher(id, name, address, phone_number, teacher_level);
                 if (ObjectUtil.isEmpty(teacher)) {
                     continue;
                 }

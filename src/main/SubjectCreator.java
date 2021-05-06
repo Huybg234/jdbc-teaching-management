@@ -36,5 +36,4 @@ public class SubjectCreator {
         MainRun.subjects.addAll(tempSubjects);
         MainRun.subjectDao.insertNewSubject(tempSubjects);
     }
-
 }

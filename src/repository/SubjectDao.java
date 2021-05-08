@@ -80,7 +80,7 @@ public class SubjectDao {
     }
 
     public void insertNewSubject(List<Subject> subjects) {
-        if (!CollectionUtil.isEmpty(subjects)) {
+        if (CollectionUtil.isEmpty(subjects)) {
             return;
         }
         subjects.forEach(this::insertNewSubject);

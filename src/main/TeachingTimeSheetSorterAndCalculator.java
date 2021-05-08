@@ -75,18 +75,20 @@ public class TeachingTimeSheetSorterAndCalculator {
             return;
         }
 
-//        MainRun.teachings.forEach(teaching -> {
-//            double salary = teaching.getTeachingSubjectClass().stream().mapToDouble(teachingTimeSheet -> {
-//                int theoryLesson = teachingTimeSheet.getSubject().getTheoryLesson();
-//                float unitTheoryCost = teachingTimeSheet.getSubject().getUnitTheoryCost();
-//                int practicalLesson = teachingTimeSheet.getSubject().getTotalLesson() - theoryLesson;
-//
-//                return teachingTimeSheet.getTotalClass() * (
-//                        (theoryLesson + practicalLesson * 0.7) * unitTheoryCost
-//                );
-//            }).sum();
-//            System.out.println("Lương của giảng viên " + teaching.getTeacher().getName() + " là: " + salary);
-//        });
+        MainRun.teachings.forEach(teaching -> {
+            double salary = teaching.getTeachingSubjectClass().stream().mapToDouble(teachingTimeSheet -> {
+                int theoryLesson = teachingTimeSheet.getSubject().getTheoryLesson();
+                float unitTheoryCost = teachingTimeSheet.getSubject().getUnitTheoryCost();
+                int practicalLesson = teachingTimeSheet.getSubject().getTotalLesson() - theoryLesson;
+
+                return teachingTimeSheet.getTotalClass() * (
+                        (theoryLesson + practicalLesson * 0.7) * unitTheoryCost
+                );
+            }).sum();
+            System.out.println("Lương của giảng viên " + teaching.getTeacher().getName() + " là: " + salary);
+        });
+
+
         for (int i = 0; i < MainRun.teachings.size() - 1; i++) {
             System.out.println("-----Tính lương cho nhân viên " + MainRun.teachers.get(i).getName() + "------");
             List<Double> salaryList = new ArrayList<>();
@@ -96,10 +98,10 @@ public class TeachingTimeSheetSorterAndCalculator {
                 int practicalLesson = MainRun.teachings.get(i).getTeachingSubjectClass().get(j).getSubject().getTotalLesson() - theoryLesson;
 
                 double salary = MainRun.teachings.get(i).getTeachingSubjectClass().get(j).getTotalClass()
-                        *(theoryLesson + practicalLesson * 0.7) * unitTheoryCost;
+                        * (theoryLesson + practicalLesson * 0.7) * unitTheoryCost;
                 salaryList.add(salary);
             }
-            int tmp =0;
+            int tmp = 0;
             for (Double aDouble : salaryList) {
                 tmp += aDouble;
             }

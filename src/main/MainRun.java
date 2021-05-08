@@ -36,12 +36,7 @@ public class MainRun {
 
     private static void init() {
         teachers = !CollectionUtil.isEmpty(teacherDao.getTeachers()) ? teacherDao.getTeachers() : new ArrayList<>();
-        if (CollectionUtil.isEmpty(teachers)) {
-            Teacher.AUTO_ID = 100;
-        } else {
-            teachers.sort(Comparator.comparing(Teacher::getId));
-            Teacher.AUTO_ID = teachers.get(teachers.size() - 1).getId() + 1;
-        }
+        Teacher.AUTO_ID = CollectionUtil.isEmpty(teachers) ? 100 : teachers.get(teachers.size() - 1).getId() + 1;
         subjects = !CollectionUtil.isEmpty(subjectDao.getSubjects()) ? subjectDao.getSubjects() : new ArrayList<>();
         if (CollectionUtil.isEmpty(subjects)) {
             Subject.AUTO_ID = 100;

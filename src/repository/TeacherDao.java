@@ -34,7 +34,7 @@ public class TeacherDao {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            String query = "SELECT * FROM " + TEACHER_TABLE_NAME;
+            String query = "SELECT * FROM " + TEACHER_TABLE_NAME + " order by id";
             preparedStatement = connection.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
             teachers = new ArrayList<>();
@@ -80,7 +80,7 @@ public class TeacherDao {
     }
 
     public void insertNewTeacher(List<Teacher> teachers) {
-        if (!CollectionUtil.isEmpty(teachers)) {
+        if (CollectionUtil.isEmpty(teachers)) {
             return;
         }
         teachers.forEach(this::insertNewTeacher);

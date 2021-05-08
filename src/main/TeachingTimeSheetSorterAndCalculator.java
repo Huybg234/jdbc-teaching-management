@@ -3,7 +3,9 @@ package main;
 import teachingtimesheet.Teaching;
 import util.CollectionUtil;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -73,17 +75,35 @@ public class TeachingTimeSheetSorterAndCalculator {
             return;
         }
 
-        MainRun.teachings.forEach(teaching -> {
-            double salary = teaching.getTeachingSubjectClass().stream().mapToDouble(teachingTimeSheet -> {
-                int theoryLesson = teachingTimeSheet.getSubject().getTheoryLesson();
-                float unitTheoryCost = teachingTimeSheet.getSubject().getUnitTheoryCost();
-                int practicalLesson = teachingTimeSheet.getSubject().getTotalLesson() - theoryLesson;
+//        MainRun.teachings.forEach(teaching -> {
+//            double salary = teaching.getTeachingSubjectClass().stream().mapToDouble(teachingTimeSheet -> {
+//                int theoryLesson = teachingTimeSheet.getSubject().getTheoryLesson();
+//                float unitTheoryCost = teachingTimeSheet.getSubject().getUnitTheoryCost();
+//                int practicalLesson = teachingTimeSheet.getSubject().getTotalLesson() - theoryLesson;
+//
+//                return teachingTimeSheet.getTotalClass() * (
+//                        (theoryLesson + practicalLesson * 0.7) * unitTheoryCost
+//                );
+//            }).sum();
+//            System.out.println("Lương của giảng viên " + teaching.getTeacher().getName() + " là: " + salary);
+//        });
+        for (int i = 0; i < MainRun.teachings.size() - 1; i++) {
+            System.out.println("-----Tính lương cho nhân viên " + MainRun.teachers.get(i).getName() + "------");
+            List<Double> salaryList = new ArrayList<>();
+            for (int j = 0; j < MainRun.teachings.get(i).getTeachingSubjectClass().size(); j++) {
+                int theoryLesson = MainRun.teachings.get(i).getTeachingSubjectClass().get(j).getSubject().getTheoryLesson();
+                double unitTheoryCost = MainRun.teachings.get(i).getTeachingSubjectClass().get(j).getSubject().getUnitTheoryCost();
+                int practicalLesson = MainRun.teachings.get(i).getTeachingSubjectClass().get(j).getSubject().getTotalLesson() - theoryLesson;
 
-                return teachingTimeSheet.getTotalClass() * (
-                        (theoryLesson + practicalLesson * 0.7) * unitTheoryCost
-                );
-            }).sum();
-            System.out.println("Lương của giảng viên " + teaching.getTeacher().getName() + " là: " + salary);
-        });
+                double salary = MainRun.teachings.get(i).getTeachingSubjectClass().get(j).getTotalClass()
+                        *(theoryLesson + practicalLesson * 0.7) * unitTheoryCost;
+                salaryList.add(salary);
+            }
+            int tmp =0;
+            for (Double aDouble : salaryList) {
+                tmp += aDouble;
+            }
+            System.out.println(tmp);
+        }
     }
 }

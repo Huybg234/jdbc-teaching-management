@@ -14,7 +14,6 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class TeachingTimeSheetCreator {
-    private int teachingSubjectNumber;
 
     public boolean isValidSubjectAndTeacher() {
         return !CollectionUtil.isEmpty(MainRun.subjects) && !CollectionUtil.isEmpty(MainRun.teachers);
@@ -54,6 +53,7 @@ public class TeachingTimeSheetCreator {
 
     private int inputTeachingSubjectNumber() {
         boolean isValidSubjectNumber = true;
+        int teachingSubjectNumber = 0;
         do {
             try {
                 teachingSubjectNumber = new Scanner(System.in).nextInt();
@@ -89,6 +89,7 @@ public class TeachingTimeSheetCreator {
                 System.out.print("Không có id môn học vừa nhập! Nhập lại: ");
                 isValidSubjectId = false;
             }
+            else return subject;
         } while (!isValidSubjectId);
         return null;
     }
@@ -122,14 +123,6 @@ public class TeachingTimeSheetCreator {
     private Subject searchSubjectId(int id) {
         Optional<Subject> subjectOptional = MainRun.subjects.stream().filter(subject -> subject.getId() == id).findFirst();
         return subjectOptional.orElse(null);
-    }
-
-    private Teacher searchTeacherId(int id) {
-        List<Teacher> collect = MainRun.teachers.stream().filter(teacher -> teacher.getId() == id).collect(Collectors.toList());
-        if (!CollectionUtil.isEmpty(collect)) {
-            collect.get(0);
-        }
-        return null;
     }
 
     private int calculateTotalLesson(List<TeachingTimeSheet> teachingTimeSheets) {

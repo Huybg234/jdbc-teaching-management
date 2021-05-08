@@ -10,7 +10,7 @@ public class Subject {
     private int theoryLesson;
     private float unitTheoryCost;
 
-    private static int AUTO_ID = 100;
+    public static int AUTO_ID = 100;
 
     public Subject() {
     }

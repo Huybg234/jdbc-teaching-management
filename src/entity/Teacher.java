@@ -1,10 +1,18 @@
 package entity;
 
+import constant.DatabaseConstant;
+import repository.TeacherDao;
+import util.DatabaseConnection;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Teacher extends Person {
 
-    private static int AUTO_ID = 100;
+    public static int AUTO_ID = 100;
 
     private static final String PROFESSOR = "Giáo sư - Tiến sĩ";
     private static final String ASSOCIATE_PROFESSOR = "Phó giáo sư - Tiến sĩ";

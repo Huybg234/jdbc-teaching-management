@@ -9,6 +9,7 @@ import teachingtimesheet.Teaching;
 import util.CollectionUtil;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -35,7 +36,19 @@ public class MainRun {
 
     private static void init() {
         teachers = !CollectionUtil.isEmpty(teacherDao.getTeachers()) ? teacherDao.getTeachers() : new ArrayList<>();
+        if (CollectionUtil.isEmpty(teachers)) {
+            Teacher.AUTO_ID = 100;
+        } else {
+            teachers.sort(Comparator.comparing(Teacher::getId));
+            Teacher.AUTO_ID = teachers.get(teachers.size() - 1).getId() + 1;
+        }
         subjects = !CollectionUtil.isEmpty(subjectDao.getSubjects()) ? subjectDao.getSubjects() : new ArrayList<>();
+        if (CollectionUtil.isEmpty(subjects)) {
+            Subject.AUTO_ID = 100;
+        } else {
+            subjects.sort(Comparator.comparing(Subject::getId));
+            Subject.AUTO_ID = subjects.get(subjects.size() - 1).getId() + 1;
+        }
         teachings = !CollectionUtil.isEmpty(teachingDao.getTeachingTimeSheet()) ? teachingDao.getTeachingTimeSheet() : new ArrayList<>();
     }
 
